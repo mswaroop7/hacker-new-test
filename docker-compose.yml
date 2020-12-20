@@ -1,0 +1,44 @@
+version: "3"
+networks:
+  backend:
+    name: app
+    driver: bridge
+
+services:
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+
+  postgres:
+    image: postgres:latest
+    networks:
+      - backend
+    container_name: postgres
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=hackernews
+      - POSTGRES_USER=hackernews
+      - POSTGRES_DB=hackernews
+    restart: unless-stopped
+
+  # APP*****************************************
+  springbootapp:
+    image: springio/gs-spring-boot-docker:latest
+    networks:
+      - backend
+    container_name: springbootapp
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    depends_on:
+      - postgres
