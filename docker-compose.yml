@@ -31,7 +31,7 @@ services:
 
   # APP*****************************************
   springbootapp:
-    image: springio/gs-spring-boot-docker:latest
+    image: springboot/hackernews-api:latest
     networks:
       - backend
     container_name: springbootapp

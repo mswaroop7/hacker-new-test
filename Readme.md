@@ -6,7 +6,7 @@ Spring Boot Project that provides APIs on the top news and comments from  Hacker
 
 Steps to build the project:
 
-1. run ./mavenw -DskipTests package
+1. run ./mvnw -DskipTests package
 2. run docker build -t springboot/hackernews-api .
 3. docker-compose up
 
